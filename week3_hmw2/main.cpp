@@ -6,12 +6,12 @@ using namespace std;
 
 int getCityYear(int p0, double perc, int delta, int p)
 {
-  perc = perc / 100;
-  int growthRate = p0 * perc + delta;
-  if (delta <= 0)
+  if (perc <= 0 && p0 < p)
   {
     return -1;
   }
+
+  perc = perc / 100;
 
   int prevYear = p0;
   int yearNum = 0;
@@ -19,6 +19,12 @@ int getCityYear(int p0, double perc, int delta, int p)
   {
     int thisYear = prevYear + prevYear * perc + delta;
     yearNum++;
+
+    if (delta <= 0 && thisYear + delta <= p)
+    {
+      return -1;
+    }
+
     cout << "Year " << yearNum << " population: " << thisYear << endl;
     prevYear = thisYear;
   }
@@ -27,13 +33,20 @@ int getCityYear(int p0, double perc, int delta, int p)
 
 int main()
 {
-  int p0 = 1000;
-  double perc = 2;
-  int delta = 50;
-  int p = 1200;
+  // case 1
+  int p0 = 1500000;
+  double perc = 2.5;
+  int delta = 10000;
+  int p = 2000000;
+
+  // // case 2
+  // int p0 = 1000;
+  // double perc = -3;
+  // int delta = 50;
+  // int p = 2000;
 
   int years = getCityYear(p0, perc, delta, p);
-  if (delta != -1)
+  if (years != -1)
   {
     cout << "Will reach the given population in " << years << " years" << endl;
   }
