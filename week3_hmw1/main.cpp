@@ -11,6 +11,8 @@ bool isPrime(int num)
     return false;
   }
 
+  // checking if number is divisible by any
+  // number between 2 and the number itself (not included)
   int i = 2;
   while (i < num)
   {
@@ -21,6 +23,8 @@ bool isPrime(int num)
     i++;
   }
 
+  // if number is not divisible by any other number other
+  // than itself and 1, it is a prime
   if (i == num)
   {
     return true;

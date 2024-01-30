@@ -6,6 +6,7 @@ using namespace std;
 
 int getCityYear(int p0, double perc, int delta, int p)
 {
+  // clear check that population will not grow enough
   if (perc <= 0 && p0 < p)
   {
     return -1;
@@ -17,9 +18,11 @@ int getCityYear(int p0, double perc, int delta, int p)
   int yearNum = 0;
   while (prevYear < p)
   {
+    // perform population calculation for current year
     int thisYear = prevYear + prevYear * perc + delta;
     yearNum++;
 
+    // additional check for not growing population
     if (delta <= 0 && thisYear + delta <= p)
     {
       return -1;
