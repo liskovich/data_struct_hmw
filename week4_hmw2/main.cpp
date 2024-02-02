@@ -24,8 +24,20 @@ int main()
   }
 
   // get number of lines in file
-  int line_count = count(istreambuf_iterator<char>(input_file), istreambuf_iterator<char>(), '\n');
+  int line_count = 1;
+  char current_char;
+  while (input_file.get(current_char))
+  {
+    if (current_char == '\n')
+    {
+      line_count++;
+    }
+  }
   int read_nums[line_count] = {0};
+
+  // reset file reader to beginning
+  input_file.clear();
+  input_file.seekg(0);
 
   // read lines from file and store to array
   string line;
@@ -33,7 +45,6 @@ int main()
   while (getline(input_file, line))
   {
     trim(line);
-    cout << "Raw num " << i + 1 << ": " << line << endl;
     if (line != "")
     {
       // fill array with numbers
@@ -47,14 +58,24 @@ int main()
 
   bubble_sort(read_nums, sizeof(read_nums) / sizeof(read_nums[0]));
 
-  // TODO: remove in prod
-  for (int j = 0; j < line_count; j++)
+  // multiply in-between 2 largest and 2 smallest numbers, and compare the multiplications
+  int sm_num_1 = read_nums[0];
+  int sm_num_2 = read_nums[1];
+  int sm_mult = sm_num_1 * sm_num_2;
+
+  int lg_num_1 = read_nums[line_count - 1];
+  int lg_num_2 = read_nums[line_count - 2];
+  int lg_mult = lg_num_1 * lg_num_2;
+
+  if (sm_mult < lg_mult)
   {
-    cout << "Sorted num " << j + 1 << ": " << read_nums[j] << endl;
+    cout << "Largest product: " << lg_mult << endl;
+  }
+  else
+  {
+    cout << "Largest product: " << sm_mult << endl;
   }
 
-  // TODO: select 2 largest and 2 smallest numbers
-  // multiply in-between largest and smallest, and compare the multiplications
   return 0;
 }
 
