@@ -4,7 +4,7 @@ using namespace std;
 
 class Song
 {
-private:
+protected:
   string title;
   string author;
   string lyrics;
