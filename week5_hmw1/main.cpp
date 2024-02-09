@@ -89,7 +89,7 @@ Song &Song::yell(int max_lines = -1)
 
 int main()
 {
-  Song ziemelmeita("Barbie Girl", "Aqua", "I'm a Barbie girl, in the Barbie world\nLife in plastic, it's fantastic\nYou can brush my hair, undress me everywhere\nImagination, life is your creation", 1997);
-  ziemelmeita.sing(1).yell();
+  Song barbie_girl("Barbie Girl", "Aqua", "I'm a Barbie girl, in the Barbie world\nLife in plastic, it's fantastic\nYou can brush my hair, undress me everywhere\nImagination, life is your creation", 1997);
+  barbie_girl.sing(1).yell();
   return 0;
 }
