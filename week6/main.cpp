@@ -67,7 +67,7 @@ int main()
   // find arithmetic mean in column 2
   double mean = (double)accumulate(col_2.begin(), col_2.end(), 0) / (double)col_2.size();
   mean = ceil(mean * 100.0) / 100.0;
-  cout << "Row 2: arithmetic mean = " << mean << endl;
+  cout << "Column 2: arithmetic mean = " << mean << endl;
 
   // find arithmetic mean in column 3 (for further calculations)
   double mean_3 = accumulate(col_3.begin(), col_3.end(), 0) / col_3.size();
@@ -81,7 +81,7 @@ int main()
   }
   double deviation = sqrt(accumulated / col_3.size());
   deviation = ceil(deviation * 100.0) / 100.0;
-  cout << "Row 3: population standard deviation = " << deviation << endl;
+  cout << "Column 3: population standard deviation = " << deviation << endl;
 
   // clear allocated memory
   for (auto &row : data)
