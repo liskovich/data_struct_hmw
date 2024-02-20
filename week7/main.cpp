@@ -18,14 +18,13 @@ public:
 class InvalidMonthException : public invalid_argument
 {
 public:
-  InvalidMonthException(int month) : invalid_argument("The entered month " + to_string(month) + "is invalid") {}
+  InvalidMonthException(int month) : invalid_argument("The entered month " + to_string(month) + " is invalid") {}
   InvalidMonthException() : invalid_argument("The month must have a numeric format") {}
 };
 
 class InvalidYearException : public invalid_argument
 {
 public:
-  InvalidYearException(int year) : invalid_argument("The entered year " + to_string(year) + " is invalid") {}
   InvalidYearException() : invalid_argument("The year must have a numeric format") {}
 };
 
@@ -85,12 +84,8 @@ bool is_leap_year(int year)
   return false;
 }
 
-int main()
+void parse_date(string &dob)
 {
-  string dob;
-  cout << "Enter your DOB" << endl;
-  cin >> dob;
-
   // try extracting date components
   string day_str = "", month_str = "", year_str = "";
   int dash_pos = 0;
@@ -121,10 +116,6 @@ int main()
       }
     }
   }
-
-  cout << "Day_str: " << day_str << endl;
-  cout << "Month_str: " << month_str << endl;
-  cout << "Year_str: " << year_str << endl;
 
   // try converting str to int representations
   int day, month, year;
@@ -173,11 +164,25 @@ int main()
   {
     throw InvalidMonthException(month);
   }
-  if (year < 1900 || year > 2050)
-  {
-    throw InvalidYearException(year);
-  }
 
   cout << get_month_name(month) << ", " << day << get_date_appendix(day) << ", " << year << endl;
+}
+
+int main()
+{
+  string dob;
+  cout << "Enter your DOB" << endl;
+  cin >> dob;
+
+  // handle in a try catch
+  try
+  {
+    parse_date(dob);
+  }
+  catch (const exception &e)
+  {
+    cerr << e.what() << endl;
+  }
+
   return 0;
 }
