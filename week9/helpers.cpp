@@ -3,9 +3,79 @@
 #include <stack>
 #include <string>
 
-bool is_operand(char c)
+bool is_invalid_char(char c)
 {
-  return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9');
+  return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z');
+}
+
+bool is_operator(char c)
+{
+  return c == '+' || c == '-' || c == '*' || c == '/';
+}
+
+// check that user wrote valid expression
+bool is_valid_input(string user_input)
+{
+  int open_bracket_count = 0;
+  int close_bracket_count = 0;
+  int operator_count = 0;
+  int number_count = 0;
+
+  string current_num = "";
+
+  for (auto c : user_input)
+  {
+    if (isdigit(c))
+    {
+      current_num += c;
+    }
+    else if (is_operator(c))
+    {
+      operator_count++;
+      if (current_num != "")
+      {
+        number_count++;
+        current_num = "";
+      }
+    }
+    else if (c == '(')
+    {
+      open_bracket_count++;
+      if (current_num != "")
+      {
+        number_count++;
+        current_num = "";
+      }
+    }
+    else if (c == ')')
+    {
+      close_bracket_count++;
+      if (current_num != "")
+      {
+        number_count++;
+        current_num = "";
+      }
+    }
+    else
+    {
+      return false;
+    }
+  }
+
+  if (current_num != "")
+  {
+    number_count++;
+  }
+  if (operator_count + 1 != number_count)
+  {
+    return false;
+  }
+  if (open_bracket_count != close_bracket_count)
+  {
+    return false;
+  }
+
+  return true;
 }
 
 // determine precedence of operators
