@@ -3,11 +3,6 @@
 #include <stack>
 #include <string>
 
-bool is_invalid_char(char c)
-{
-  return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z');
-}
-
 bool is_operator(char c)
 {
   return c == '+' || c == '-' || c == '*' || c == '/';
